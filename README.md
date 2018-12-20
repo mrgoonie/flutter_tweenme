@@ -2,6 +2,8 @@
 
 A tween library framework for Flutter project, inspired from TweenMax (https://greensock.com/).
 
+![alt text](https://raw.githubusercontent.com/mrgoonie/flutter_tweenme/master/logo.jpg "TweenMe for Flutter")
+
 ## Introduction
 
 If you're a Javascript or Actionscript developer, you probably know **TweenMax** - this is an awesome tween library developed by GreenSock team, which have a huge support for doing animation. 
