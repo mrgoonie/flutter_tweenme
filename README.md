@@ -2,6 +2,8 @@
 
 A tween library framework for Flutter project, inspired from TweenMax (https://greensock.com/).
 
+https://www.youtube.com/watch?v=5bfqgPPCdjA
+
 ![alt text](https://raw.githubusercontent.com/mrgoonie/flutter_tweenme/master/logo.jpg "TweenMe for Flutter")
 
 ## Introduction

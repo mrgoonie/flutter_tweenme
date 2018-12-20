@@ -2,12 +2,13 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_tweenme/tweenme/tweenme.dart';
 
+/// A widget that can be targeted by a [TweenMe] class.
+/// This is an universal widget that can be placed inside any other widgets.
 class TweenContainer extends StatefulWidget {
-  TweenContainerState state;
-  TweenData data;
-  List<TweenMe> tweens = [];
-
-  final Widget child;
+  /// Creates a new tween-able container widget that can apply `TweenMe`.
+  ///
+  /// The [data] argument must not be null.
+  /// 
   TweenContainer({
     Key key, 
     this.data,
@@ -16,34 +17,52 @@ class TweenContainer extends StatefulWidget {
     key: key
   );
 
+  /// Hold all transformation & position data of the container.
+  TweenData data;
+
+  TweenContainerState _state;
+  List<TweenMe> _tweens = [];
+
+  /// The child contained by this container.
+  final Widget child;
+
+  /// The state from the closest instance of this class that encloses the given context.
   static TweenContainerState of(BuildContext context){
     return context.ancestorStateOfType(TypeMatcher<TweenContainerState>());
   }
 
+  /// Update the new values of `data` to this container.
   void update(){
-    state?.update();
+    _state?.update();
   }
 
+  /// Dispose a specific tween on this container.
   void killTween(TweenMe tween){
-    int index = tweens.indexOf(tween);
+    int index = _tweens.indexOf(tween);
     tween.dispose();
-    tweens.removeAt(index);
+    _tweens.removeAt(index);
   }
 
+  /// Add a new tween to this container's list.
+  void add(TweenMe tween){
+    _tweens.add(tween);
+  }
+
+  /// Dispose this container and all of its tweens.
   void dispose(){
-    if(tweens.length > 0){
-      for(int i=0; i<tweens.length; i++){
-        tweens[i].dispose();
+    if(_tweens.length > 0){
+      for(int i=0; i<_tweens.length; i++){
+        _tweens[i].dispose();
       }
-      tweens = [];
+      _tweens = [];
     }
-    state?.dispose();
+    _state?.dispose();
   }
 
   @override
     TweenContainerState createState(){
-      state = new TweenContainerState();
-      return state;
+      _state = new TweenContainerState();
+      return _state;
   }
 }
 
@@ -95,7 +114,7 @@ class TweenContainerState extends State<TweenContainer> {
 
   @override
     void didUpdateWidget(TweenContainer oldWidget) {
-      widget.state = this;
+      widget._state = this;
 
       // get parent widget type:
       parentRenderType = context.ancestorRenderObjectOfType(TypeMatcher<RenderObject>()).runtimeType.toString();
