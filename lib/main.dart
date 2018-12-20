@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tweenme/screens/basic_example.dart';
+import 'package:flutter_tweenme/screens/easing_example.dart';
 import 'package:flutter_tweenme/screens/animated_column_chart.dart';
 import 'package:flutter_tweenme/screens/depth_carousel.dart';
 import 'package:flutter_tweenme/screens/yoyo_example.dart';
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder> {
         '/home': (BuildContext context) => HomeScreen(),
         '/basic_example' : (BuildContext context) => BasicExample(),
+        '/easing_example' : (BuildContext context) => EasingExample(),
         '/animated_column_chart' : (BuildContext context) => AnimatedColumnChart(),
         '/depth_carousel' : (BuildContext context) => DepthCarousel(),
         '/yoyo_example': (BuildContext context) => YoyoExample(),
@@ -34,6 +36,7 @@ class HomeScreen extends StatelessWidget {
 
   final List<ExampleItem> examples = [
     ExampleItem("Basic Example", "/basic_example"),
+    ExampleItem("All Eases of TweenMe", "/easing_example"),
     ExampleItem("Animated Column Chart", "/animated_column_chart"),
     ExampleItem("Depth Carousel", "/depth_carousel"),
     ExampleItem("Yoyo Example", "/yoyo_example"),

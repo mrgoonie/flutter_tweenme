@@ -36,11 +36,34 @@ class TweenContainer extends StatefulWidget {
     _state?.update();
   }
 
+  /// Set values of `data` to this container.
+  void set(TweenData newData){
+    if(newData.opacity != null) data.opacity = newData.opacity;
+    if(newData.color != null) data.color = newData.color;
+    if(newData.rotation != null) data.rotation = newData.rotation;
+    if(newData.scale != null) data.scale = newData.scale;
+    if(newData.left != null) data.left = newData.left;
+    if(newData.top != null) data.top = newData.top;
+    if(newData.bottom != null) data.bottom = newData.bottom;
+    if(newData.right != null) data.right = newData.right;
+    if(newData.width != null) data.width = newData.width;
+    if(newData.height != null) data.height = newData.height;
+    if(newData.margin != null) data.margin = newData.margin;
+    if(newData.padding != null) data.padding = newData.padding;
+    if(newData.border != null) data.border = newData.border;
+    if(newData.borderRadius != null) data.borderRadius = newData.borderRadius;
+    if(newData.transformOrigin != null) data.transformOrigin = newData.transformOrigin;
+
+    if(newData.left != null && newData.right != null) data.width = null;
+    if(newData.top != null && newData.bottom != null) data.height = null;
+    
+    update();
+  }
+
   /// Dispose a specific tween on this container.
   void killTween(TweenMe tween){
-    int index = _tweens.indexOf(tween);
+    _tweens.remove(tween);
     tween.dispose();
-    _tweens.removeAt(index);
   }
 
   /// Add a new tween to this container's list.
@@ -56,7 +79,7 @@ class TweenContainer extends StatefulWidget {
       }
       _tweens = [];
     }
-    _state?.dispose();
+    // _state?.dispose();
   }
 
   @override
@@ -109,13 +132,14 @@ class TweenContainerState extends State<TweenContainer> {
   @override
     void dispose() {
       // print("disposed");
+      widget._state = null;
       super.dispose();
     }
 
   @override
     void didUpdateWidget(TweenContainer oldWidget) {
       widget._state = this;
-
+      
       // get parent widget type:
       parentRenderType = context.ancestorRenderObjectOfType(TypeMatcher<RenderObject>()).runtimeType.toString();
       shouldSetPosition = (parentRenderType == "RenderStack");

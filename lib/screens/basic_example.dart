@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tweenme/tweenme/tweenme.dart';
+import 'package:flutter_tweenme/tweenme/tween_easing.dart';
 
 class BasicExample extends StatelessWidget {
 
@@ -52,6 +53,8 @@ class BasicExample extends StatelessWidget {
                         // border: Border.all(color: Colors.white, width: 1)
                       ),
                     );
+
+                    tweenContainer.set(TweenData(color: Colors.red));
                   },
                 ),
                 
@@ -65,7 +68,7 @@ class BasicExample extends StatelessWidget {
                     TweenMe.killTweensOf(tweenContainer);
                     TweenMe.to(
                       tweenContainer,
-                      duration: 1,
+                      duration: 0.5,
                       data: TweenData(
                         width: 250,
                         height: 250,
@@ -74,7 +77,7 @@ class BasicExample extends StatelessWidget {
                         // transformOrigin: Offset(0.5, 0.5),
                         color: Colors.blue
                       ),
-                      ease: Curves.ease,
+                      // ease: Curves.ease,
                       // repeat: -1,
                       // yoyo: true,
                     );

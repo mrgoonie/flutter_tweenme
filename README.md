@@ -131,7 +131,7 @@ TweenMe.to(
 );
 ```
 
-### Methods ###
+### TweenMe Methods ###
 
 - play()
 - stop()
@@ -166,6 +166,63 @@ myTween.seek(0.5);
 myTween.dispose();
 
 ```
+
+## TweenContainer
+
+You want to update the color, opacity, transformation or position of **TweenContainer** instantly? Here you go:
+
+```
+TweenContainer myContainer = TweenContainer(
+  data: TweenData(
+    width: 200,
+    height: 200,
+    color: Colors.red
+  )
+);
+
+// Let update the color of this container after 2 seconds:
+Future.delayed(Duration(milliseconds: 2000), (){
+  tweenContainer.set(TweenData(color: Colors.blue));
+});
+
+```
+Easy, right?
+
+The **TweenContainer** can kill all the applied tweens itself, with:
+```
+myContainer.dispose();
+```
+
+## Extra Eases:
+
+(Yes, TweenMe has more eases than Flutter)
+
+Beside the default curves of Flutter: 
+
+- Ease.linear *(same with Curves.linear)*
+- Ease.decelerate *(same with Curves.decelerate)*
+- Ease.ease *(same with Curves.ease)*
+- Ease.easeOut *(same with Curves.easeOut)*
+- Ease.easeIn *(same with Curves.easeIn)*
+- Ease.easeInOut *(same with Curves.easeInOut)*
+- Ease.fastOutSlowIn *(same with Curves.fastOutSlowIn)*
+- Ease.bounceIn *(same with Curves.bounceIn)*
+- Ease.bounceOut *(same with Curves.bounceOut)*
+- Ease.bounceInOut *(same with Curves.bounceInOut)*
+- Ease.elasticOut *(same with Curves.elasticOut)*
+- Ease.elasticIn *(same with Curves.elasticIn)*
+- Ease.elasticInOut *(same with Curves.elasticInOut)*
+
+You also can use:
+- Ease.backIn
+- Ease.backOut
+- Ease.backInOut
+- Ease.slowMo
+- Ease.sineIn
+- Ease.sineOut
+- Ease.sineInOut
+
+Check this example to understand more about eases: https://github.com/mrgoonie/flutter_tweenme/tree/master/lib/screens/easing_example.dart
 
 ## Error report:
 **This plugin hasn't been fully tested. Use as your own risk!**

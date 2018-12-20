@@ -1,9 +1,10 @@
-## [0.1.3] - Improve performance
+## [0.1.3] - Added more eases & Improve performance
 
-* Improve performance.
+* Added more eases: `Ease.backIn`, `Ease.backOut`, `Ease.backInOut`, `Ease.slowMo`, `Ease.sineIn`, `Ease.sineOut`, `Ease.sineInOut`.
 * Added more examples.
-* Added `dispose()` function to TweenContainer.
-* Updated TweenContainer constructor.
+* Added `dispose()` and `set(TweenData)` function to **TweenContainer**.
+* Updated TweenContainer constructor, clean some code.
+* Improve performance.
 
 ## [0.1.2] - Published the package.
 

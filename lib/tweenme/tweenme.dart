@@ -8,6 +8,7 @@ import 'package:flutter_tweenme/tweenme/tween_container.dart';
 // Exports:
 export 'package:flutter_tweenme/tweenme/tween_data.dart';
 export 'package:flutter_tweenme/tweenme/tween_container.dart';
+export 'package:flutter_tweenme/tweenme/tween_easing.dart';
 
 typedef void OnUpdateCallback(double progress);
 typedef void OnCompleteCallback(TweenContainer target);
