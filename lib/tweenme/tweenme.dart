@@ -9,7 +9,7 @@ import 'package:flutter_tweenme/tweenme/tween_container.dart';
 export 'package:flutter_tweenme/tweenme/tween_data.dart';
 export 'package:flutter_tweenme/tweenme/tween_container.dart';
 
-typedef void OnUpdateCallback(double);
+typedef void OnUpdateCallback(double progress);
 typedef void OnCompleteCallback(TweenContainer target);
 
 class TweenMe implements TickerProvider {

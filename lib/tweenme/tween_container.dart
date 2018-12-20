@@ -2,33 +2,16 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_tweenme/tweenme/tweenme.dart';
 
-typedef void OnUpdateCallback(double);
-
 class TweenContainer extends StatefulWidget {
-  TweenData data;
   TweenContainerState state;
+  TweenData data;
   List<TweenMe> tweens = [];
 
-  final double duration; // in seconds
-  final double delay;
-  final bool autoplay;
-  final int repeat;
-  final Curve ease;
   final Widget child;
-  final VoidCallback onComplete;
-  final OnUpdateCallback onUpdate;
-
   TweenContainer({
     Key key, 
     this.data,
-    this.duration,
-    this.delay,
-    this.autoplay = true,
-    this.repeat = 0,
-    this.ease,
     this.child,
-    this.onComplete,
-    this.onUpdate,
   }) : super(
     key: key
   );
@@ -45,6 +28,16 @@ class TweenContainer extends StatefulWidget {
     int index = tweens.indexOf(tween);
     tween.dispose();
     tweens.removeAt(index);
+  }
+
+  void dispose(){
+    if(tweens.length > 0){
+      for(int i=0; i<tweens.length; i++){
+        tweens[i].dispose();
+      }
+      tweens = [];
+    }
+    state?.dispose();
   }
 
   @override
@@ -78,10 +71,7 @@ class TweenContainerState extends State<TweenContainer> {
       if(data.rotation == null) data.rotation = 0;
       if(data.transformOrigin == null) data.transformOrigin = Offset(0.5, 0.5);
       if(data.scale == null) data.scale = Offset(1, 1);
-      /* if(shouldSetPosition){
-        if(data.left == null && data.right == null) data.left = 0;
-        if(data.top == null && data.bottom == null) data.top = 0;
-      } */
+      
       // check for exceptions:
 
       if(data.left != null && data.right != null && data.width != null){
@@ -106,6 +96,7 @@ class TweenContainerState extends State<TweenContainer> {
   @override
     void didUpdateWidget(TweenContainer oldWidget) {
       widget.state = this;
+
       // get parent widget type:
       parentRenderType = context.ancestorRenderObjectOfType(TypeMatcher<RenderObject>()).runtimeType.toString();
       shouldSetPosition = (parentRenderType == "RenderStack");

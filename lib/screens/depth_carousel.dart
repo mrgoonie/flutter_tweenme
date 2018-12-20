@@ -3,35 +3,21 @@ import 'package:flutter_tweenme/tweenme/tweenme.dart';
 import 'dart:math' as math;
 
 class CarouselCard extends TweenContainer {
-  TweenData data;
-  List<TweenMe> tweens = [];
-
+  
   int posId;
   int index;
-
-  final double duration; // in seconds
-  final double delay;
-  final bool autoplay;
-  final int repeat;
-  final Curve ease;
-  final Widget child;
-  final VoidCallback onComplete;
-  final OnUpdateCallback onUpdate;
 
   CarouselCard({
     Key key, 
     this.posId,
     this.index,
-    this.data,
-    this.duration,
-    this.delay,
-    this.autoplay = true,
-    this.repeat = 0,
-    this.ease,
-    this.child,
-    this.onComplete,
-    this.onUpdate,
-  });
+    TweenData data,
+    Widget child,
+  }) : super(
+    key: key,
+    data: data,
+    child: child,
+  );
 }
 
 class DepthCarousel extends StatefulWidget {
