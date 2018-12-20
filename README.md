@@ -72,7 +72,8 @@ TweenContainer tweenableContainer = TweenContainer(
 
 Looks familiar, eh?
 
-## More examples can be found here: https://github.com/mrgoonie/flutter_tweenme/lib/screens/
+## More examples can be found here: 
+https://github.com/mrgoonie/flutter_tweenme/tree/master/lib/screens
 
 ## Which data of TweenContainer that you can animate?
 
