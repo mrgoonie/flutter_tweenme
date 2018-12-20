@@ -1,3 +1,8 @@
+## [0.1.4] - Added default ease & duration 
+
+* Added default ease: `Ease.ease`
+* Added default duration: 1.0 (second)
+
 ## [0.1.3] - Added more eases & Improve performance
 
 * Added more eases: `Ease.backIn`, `Ease.backOut`, `Ease.backInOut`, `Ease.slowMo`, `Ease.sineIn`, `Ease.sineOut`, `Ease.sineInOut`.

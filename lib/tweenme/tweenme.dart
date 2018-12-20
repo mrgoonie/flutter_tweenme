@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_tweenme/tweenme/tween_data.dart';
 import 'package:flutter_tweenme/tweenme/tween_container.dart';
+import 'package:flutter_tweenme/tweenme/tween_easing.dart';
 
 // Exports:
 export 'package:flutter_tweenme/tweenme/tween_data.dart';
@@ -21,8 +22,8 @@ class TweenMe implements TickerProvider {
   TweenMe(
     this.target, {
     this.data,
-    this.duration,
-    this.delay,
+    this.duration = 1,
+    this.delay = 0,
     this.yoyo = false,
     this.autoplay = true,
     this.repeat = 0,
@@ -113,7 +114,8 @@ class TweenMe implements TickerProvider {
       vsync: this
     );
 
-    CurvedAnimation curve = CurvedAnimation(parent: _controller, curve: ease);
+    Curve tweenEase = (ease == null) ? Ease.ease : ease;
+    CurvedAnimation curve = CurvedAnimation(parent: _controller, curve: tweenEase);
 
     // Animations
 

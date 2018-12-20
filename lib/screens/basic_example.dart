@@ -77,7 +77,7 @@ class BasicExample extends StatelessWidget {
                         // transformOrigin: Offset(0.5, 0.5),
                         color: Colors.blue
                       ),
-                      // ease: Curves.ease,
+                      ease: Curves.ease,
                       // repeat: -1,
                       // yoyo: true,
                     );
