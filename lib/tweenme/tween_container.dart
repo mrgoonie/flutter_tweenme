@@ -137,7 +137,6 @@ class _TweenContainerState extends State<TweenContainer> {
 
   @override
     void dispose() {
-      // print("disposed");
       widget._state = null;
       super.dispose();
     }
@@ -171,7 +170,6 @@ class _TweenContainerState extends State<TweenContainer> {
       }
 
       widget.data = data;
-      print(widget.data);
 
       // print("[UPDATE] Current size: ${data.width} x ${data.height}");
       

@@ -29,6 +29,11 @@ class BasicExample extends StatelessWidget {
             alignment: Alignment.center,
             child: tweenContainer
           ),
+
+          /* Align(
+            alignment: Alignment.center,
+            child: CircularProgressIndicator()
+          ), */
           
           // button
           Align(

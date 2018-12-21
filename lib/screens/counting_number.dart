@@ -17,16 +17,25 @@ class _CountingNumberState extends State<CountingNumber> {
   final int countTo = 100;
   int count = 0;
 
+  TweenContainer numberHolder;
+  TweenContainer emptyContainer;
+
+  @override
+    void initState() {
+      super.initState();
+    }
+
   @override
     void dispose() {
-      
+      if(numberHolder != null) numberHolder.dispose();
+      if(emptyContainer != null) emptyContainer.dispose();
       super.dispose();
     }
 
   @override
   Widget build(BuildContext context) {
 
-    TweenContainer numberHolder = TweenContainer(
+    numberHolder = TweenContainer(
       data: TweenData(
         top: 100, 
         left: 100,
@@ -38,7 +47,7 @@ class _CountingNumberState extends State<CountingNumber> {
       child: Center(child: Text("$count", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 60, fontWeight: FontWeight.bold)))
     );
 
-    TweenContainer emptyContainer = TweenContainer(
+    emptyContainer = TweenContainer(
       data: TweenData(top: 0),
     );
 
