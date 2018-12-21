@@ -4,6 +4,7 @@ import 'package:flutter_tweenme/screens/easing_example.dart';
 import 'package:flutter_tweenme/screens/animated_column_chart.dart';
 import 'package:flutter_tweenme/screens/depth_carousel.dart';
 import 'package:flutter_tweenme/screens/yoyo_example.dart';
+import 'package:flutter_tweenme/screens/counting_number.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         '/animated_column_chart' : (BuildContext context) => AnimatedColumnChart(),
         '/depth_carousel' : (BuildContext context) => DepthCarousel(),
         '/yoyo_example': (BuildContext context) => YoyoExample(),
+        '/counting_number': (BuildContext context) => CountingNumber(),
       }
     );
   } 
@@ -40,6 +42,7 @@ class HomeScreen extends StatelessWidget {
     ExampleItem("Animated Column Chart", "/animated_column_chart"),
     ExampleItem("Depth Carousel", "/depth_carousel"),
     ExampleItem("Yoyo Example", "/yoyo_example"),
+    ExampleItem("Counting Number with Eases", "/counting_number"),
   ];
 
   @override

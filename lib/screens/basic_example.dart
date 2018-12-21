@@ -4,6 +4,8 @@ import 'package:flutter_tweenme/tweenme/tween_easing.dart';
 
 class BasicExample extends StatelessWidget {
 
+  final String title = "Basic Example";
+
   @override
   Widget build(BuildContext context) {
     
@@ -15,7 +17,7 @@ class BasicExample extends StatelessWidget {
         height: 100,
         color: Colors.red
       ),
-      child: Icon(Icons.star, color: Colors.white)
+      child: Center(child: Text("Hello Friends!", textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)))
     );
 
     Widget content = Container(
@@ -31,8 +33,8 @@ class BasicExample extends StatelessWidget {
           // button
           Align(
             alignment: Alignment(0, 0.8),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
+            child: Wrap(
+              spacing: 10,
               children: <Widget>[
                 FlatButton(
                   child: Icon(Icons.arrow_back, color: Colors.white),
@@ -44,8 +46,8 @@ class BasicExample extends StatelessWidget {
                       duration: 1,
                       ease: Curves.fastOutSlowIn,
                       data: TweenData(
-                        width: 100,
-                        height: 100,
+                        // width: 100,
+                        // height: 100,
                         rotation: 0,
                         scale: Offset(1, 1),
                         opacity: 1,
@@ -57,9 +59,6 @@ class BasicExample extends StatelessWidget {
                     tweenContainer.set(TweenData(color: Colors.red));
                   },
                 ),
-                
-                // spacing
-                SizedBox(width: 5),
 
                 FlatButton(
                   child: Icon(Icons.arrow_forward, color: Colors.white),
@@ -70,10 +69,11 @@ class BasicExample extends StatelessWidget {
                       tweenContainer,
                       duration: 0.5,
                       data: TweenData(
-                        width: 250,
-                        height: 250,
+                        opacity: 0.5,
+                        // width: 250,
+                        // height: 250,
                         rotation: 180,
-                        // scale: Offset(3, 3),
+                        scale: Offset(3, 3),
                         // transformOrigin: Offset(0.5, 0.5),
                         color: Colors.blue
                       ),
@@ -81,6 +81,17 @@ class BasicExample extends StatelessWidget {
                       // repeat: -1,
                       // yoyo: true,
                     );
+                  },
+                ),
+
+                FlatButton(
+                  child: Text("HIDE/SHOW", style: TextStyle(color: Colors.white)),
+                  color: Colors.blue,
+                  onPressed: (){
+                    // show & hide container:
+                    tweenContainer.set(TweenData(
+                      visible: !tweenContainer.data.visible
+                    ));
                   },
                 ),
 
@@ -96,7 +107,7 @@ class BasicExample extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Basic Example"),
+        title: Text(title),
       ),
       body: content,
     );

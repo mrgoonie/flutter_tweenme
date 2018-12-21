@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TweenData {
+  bool visible;
   double top, left, right, bottom, width, height, opacity, rotation;
   Offset transformOrigin, scale;
   EdgeInsetsGeometry margin, padding;
@@ -10,6 +11,7 @@ class TweenData {
   DecorationImage backgroundImage;
 
   TweenData({
+    this.visible,
     this.top,
     this.left,
     this.right,
@@ -30,6 +32,7 @@ class TweenData {
 
   TweenData clone(){
     return TweenData(
+      visible: visible,
       top: top,
       left: left,
       right: right,

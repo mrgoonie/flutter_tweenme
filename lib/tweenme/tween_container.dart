@@ -11,24 +11,26 @@ class TweenContainer extends StatefulWidget {
   /// 
   TweenContainer({
     Key key, 
+    this.name,
     this.data,
     this.child,
   }) : super(
     key: key
   );
 
-  /// Hold all transformation & position data of the container.
+  /// Hold all displayed data of the container.
   TweenData data;
 
-  TweenContainerState _state;
+  _TweenContainerState _state;
   List<TweenMe> _tweens = [];
 
   /// The child contained by this container.
   final Widget child;
+  final String name;
 
   /// The state from the closest instance of this class that encloses the given context.
-  static TweenContainerState of(BuildContext context){
-    return context.ancestorStateOfType(TypeMatcher<TweenContainerState>());
+  static _TweenContainerState of(BuildContext context){
+    return context.ancestorStateOfType(TypeMatcher<_TweenContainerState>());
   }
 
   /// Update the new values of `data` to this container.
@@ -38,6 +40,7 @@ class TweenContainer extends StatefulWidget {
 
   /// Set values of `data` to this container.
   void set(TweenData newData){
+    if(newData.visible != null) data.visible = newData.visible;
     if(newData.opacity != null) data.opacity = newData.opacity;
     if(newData.color != null) data.color = newData.color;
     if(newData.rotation != null) data.rotation = newData.rotation;
@@ -83,13 +86,13 @@ class TweenContainer extends StatefulWidget {
   }
 
   @override
-    TweenContainerState createState(){
-      _state = new TweenContainerState();
+    _TweenContainerState createState(){
+      _state = new _TweenContainerState();
       return _state;
   }
 }
 
-class TweenContainerState extends State<TweenContainer> {
+class _TweenContainerState extends State<TweenContainer> {
   String parentRenderType;
 
   TweenData data;
@@ -99,7 +102,7 @@ class TweenContainerState extends State<TweenContainer> {
   @override
     void initState() {
 
-      data = widget.data;
+      data = (widget.data != null) ? widget.data : TweenData();
 
       // get parent widget type:
       parentRenderType = context.ancestorRenderObjectOfType(TypeMatcher<RenderObject>()).runtimeType.toString();
@@ -108,6 +111,7 @@ class TweenContainerState extends State<TweenContainer> {
       shouldSetPosition = (parentRenderType == "RenderStack");
       // print("shouldSetPosition: $shouldSetPosition");
 
+      if(data.visible == null) data.visible = true;
       if(data.opacity == null || data.opacity > 1) data.opacity = 1;
       if(data.opacity < 0) data.opacity = 0;
       if(data.rotation == null) data.rotation = 0;
@@ -125,6 +129,8 @@ class TweenContainerState extends State<TweenContainer> {
         data.height = null;
         print('[TweenContainer] If you used "top" and "bottom", the value of "height" will have no effects.');
       }
+
+      widget.data = data;
 
       super.initState();
     }
@@ -145,7 +151,9 @@ class TweenContainerState extends State<TweenContainer> {
       shouldSetPosition = (parentRenderType == "RenderStack");
       // print("parentRenderType = $parentRenderType");
 
-      data = widget.data;
+      data = (widget.data != null) ? widget.data : TweenData();
+      
+      if(data.visible == null) data.visible = true;
       if(data.opacity == null || data.opacity > 1) data.opacity = 1;
       if(data.opacity < 0) data.opacity = 0;
       if(data.rotation == null) data.rotation = 0;
@@ -161,6 +169,9 @@ class TweenContainerState extends State<TweenContainer> {
         data.height = null;
         print('[TweenContainer] If you used "top" and "bottom", the value of "height" will have no effects.');
       }
+
+      widget.data = data;
+      print(widget.data);
 
       // print("[UPDATE] Current size: ${data.width} x ${data.height}");
       
@@ -189,6 +200,7 @@ class TweenContainerState extends State<TweenContainer> {
     
     Widget container;
     Widget myChild;
+    Matrix4 transformMatrix;
 
     Widget wrapper = Container(
       width: data.width,
@@ -204,14 +216,34 @@ class TweenContainerState extends State<TweenContainer> {
       child: widget.child
     );
 
-    myChild = Transform(
-      alignment: FractionalOffset(data.transformOrigin.dx, data.transformOrigin.dy),
-      transform: Matrix4.rotationZ(data.rotation * math.pi / 180)..scale(data.scale.dx, data.scale.dy),
-      child: Opacity(
+    if(data.opacity != 1 || (data.opacity == 1 && widget.data.opacity != 1)){
+      myChild = Opacity(
         opacity: data.opacity,
         child: wrapper
-      )
-    );
+      );
+    } else {
+      myChild = wrapper;
+    }
+
+    if((data.rotation == 0 && widget.data.rotation != 0) || data.rotation != 0){
+      transformMatrix = Matrix4.rotationZ(data.rotation * math.pi / 180);
+    }
+
+    if((data.scale.dx == 1 && widget.data.scale.dx != 1) || data.scale.dx != 1 || (data.scale.dy == 1 && widget.data.scale.dy != 1) || data.scale.dy != 1){
+      if(transformMatrix == null){
+        transformMatrix = Matrix4.zero()..scale(data.scale.dx, data.scale.dy);
+      } else {
+        transformMatrix = transformMatrix..scale(data.scale.dx, data.scale.dy);
+      }
+    }
+
+    if(transformMatrix != null){
+      myChild = Transform(
+        alignment: FractionalOffset(data.transformOrigin.dx, data.transformOrigin.dy),
+        transform: transformMatrix,
+        child: myChild
+      );
+    }
 
     if(parentRenderType == "RenderFlex" || parentRenderType == "RenderPositionedBox"){
       container = myChild;
@@ -227,6 +259,6 @@ class TweenContainerState extends State<TweenContainer> {
       );
     }
 
-    return container;
+    return (data.visible) ? container : Container();
   }
 }

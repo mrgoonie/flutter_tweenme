@@ -102,8 +102,7 @@ class TweenMe implements TickerProvider {
   }
 
   void _init() {
-
-    _oldData = target.data.clone();
+    _oldData = (target.data == null) ? TweenData() : target.data.clone();
 
     if(data.transformOrigin != null) target.data.transformOrigin = data.transformOrigin;
 
@@ -232,7 +231,6 @@ class TweenMe implements TickerProvider {
           _controller.reverse();
         } else {
           _controller.reset();
-          // print(_oldData.scale);
           target.data = _oldData.clone();
           target.update();
         }
