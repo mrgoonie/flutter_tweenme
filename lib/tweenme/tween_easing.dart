@@ -43,9 +43,9 @@ class BackOutCurve extends Curve {
   @override
   double transform(double t) {
     assert(t >= 0.0 && t <= 1.0);
-    final double s = period / 4.0;
+    // final double s = period / 4.0;
     final double _p1 = 1.70158;
-    final double _p2 = _p1 * 1.525;
+    // final double _p2 = _p1 * 1.525;
     final double result = ((t = t - 1) * t * ((_p1 + 1) * t + _p1) + 1);
     return result;
   }
@@ -73,9 +73,9 @@ class BackInCurve extends Curve {
   @override
   double transform(double t) {
     assert(t >= 0.0 && t <= 1.0);
-    final double s = period / 4.0;
+    // final double s = period / 4.0;
     final double _p1 = 1.70158;
-    final double _p2 = _p1 * 1.525;
+    // final double _p2 = _p1 * 1.525;
     final double result = t * t * ((_p1 + 1) * t - _p1);
     return result;
   }
@@ -103,7 +103,7 @@ class BackInOutCurve extends Curve {
   @override
   double transform(double t) {
     assert(t >= 0.0 && t <= 1.0);
-    final double s = period / 4.0;
+    // final double s = period / 4.0;
     final double _p1 = 1.70158;
     final double _p2 = _p1 * 1.525;
     final double result = ((t *= 2) < 1) ? 0.5 * t * t * ((_p2 + 1) * t - _p2) : 0.5 * ((t -= 2) * t * ((_p2 + 1) * t + _p2) + 2);

@@ -1,5 +1,7 @@
 library tweenme;
 
+// version 0.1.5
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_tweenme/tweenme/tween_data.dart';
@@ -103,7 +105,7 @@ class TweenMe implements TickerProvider {
 
   void _init() {
     _oldData = (target.data == null) ? TweenData() : target.data.clone();
-
+    
     if(data.transformOrigin != null) target.data.transformOrigin = data.transformOrigin;
 
     int speed = (duration != null) ? (duration * 1000).toInt() : 1000;
@@ -187,6 +189,13 @@ class TweenMe implements TickerProvider {
       target.data.scale = Offset(
         _oldData.scale.dx + progress * (data.scale.dx - _oldData.scale.dx), 
         _oldData.scale.dy + progress * (data.scale.dy - _oldData.scale.dy)
+      );
+    }
+
+    if(data.transition != null) {
+      target.data.transition = Offset(
+        _oldData.transition.dx + progress * (data.transition.dx - _oldData.transition.dx), 
+        _oldData.transition.dy + progress * (data.transition.dy - _oldData.transition.dy)
       );
     }
     

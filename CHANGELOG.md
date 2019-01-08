@@ -1,3 +1,10 @@
+## [0.1.5] - Added transition tween & fixed bugs
+
+* Added tween `transition`.
+* Added `fitParentSize` attribute ***(bool)*** to `TweenContainer`.
+* Fixed `"Incorrect use of ParentDataWidget"` errors.
+* Fixed `rotation` with `transformOrigin` bug.
+
 ## [0.1.4] - Added default ease & duration 
 
 * Added default ease: `Ease.ease`

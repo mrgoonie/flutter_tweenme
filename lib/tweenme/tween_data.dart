@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TweenData {
   bool visible;
   double top, left, right, bottom, width, height, opacity, rotation;
-  Offset transformOrigin, scale;
+  Offset transformOrigin, scale, transition;
   EdgeInsetsGeometry margin, padding;
   Color color;
   BorderRadius borderRadius;
@@ -27,6 +27,7 @@ class TweenData {
     this.borderRadius,
     this.transformOrigin,
     this.scale,
+    this.transition,
     this.backgroundImage
   });
 
@@ -48,6 +49,7 @@ class TweenData {
       borderRadius: borderRadius,
       transformOrigin: transformOrigin,
       scale: scale,
+      transition: transition,
       backgroundImage: backgroundImage
     );
   }
